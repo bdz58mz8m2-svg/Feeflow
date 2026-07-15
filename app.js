@@ -84,3 +84,55 @@ function calculateFee(balance, regime) {
     };
 
 }
+// ---------- Display Results ----------
+
+function displayResults(result) {
+
+    enforcementFeeOutput.textContent =
+        "£" + result.enforcementFee.toFixed(0);
+
+    newBalanceOutput.textContent =
+        formatCurrency(result.newBalance);
+
+    resultsCard.classList.remove("hidden");
+
+}
+
+// ---------- Calculate Button ----------
+
+calculateButton.addEventListener("click", () => {
+
+    const balance =
+        parseFloat(balanceInput.value);
+
+    if (isNaN(balance) || balance <= 0) {
+
+        alert("Please enter a valid balance.");
+
+        return;
+
+    }
+
+    const regime =
+        getSelectedRegime();
+
+    const result =
+        calculateFee(balance, regime);
+
+    displayResults(result);
+
+});
+
+// ---------- Reset Button ----------
+
+resetButton.addEventListener("click", () => {
+
+    balanceInput.value = "";
+
+    enforcementFeeOutput.textContent = "£0.00";
+
+    newBalanceOutput.textContent = "£0.00";
+
+    resultsCard.classList.add("hidden");
+
+});
