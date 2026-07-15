@@ -117,10 +117,18 @@ calculateButton.addEventListener("click", () => {
         getSelectedRegime();
 
     const result =
-        calculateFee(balance, regime);
+    calculateFee(balance, regime);
 
-    displayResults(result);
+lastCalculation = {
 
+    balance,
+    regime,
+    result,
+    breakdown: createBreakdown(balance, regime, result)
+
+};
+
+displayResults(result);
 });
 
 // ---------- Reset Button ----------
