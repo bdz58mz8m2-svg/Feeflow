@@ -136,3 +136,118 @@ resetButton.addEventListener("click", () => {
     resultsCard.classList.add("hidden");
 
 });
+// ---------- Breakdown ----------
+
+const breakdownButton = document.getElementById("breakdownButton");
+const copyButton = document.getElementById("copyButton");
+
+let lastCalculation = null;
+
+function createBreakdown(balance, regime, result) {
+
+    const settings = REGIMES[regime];
+
+    const balanceWithoutCompliance =
+        balance - settings.complianceFee;
+
+    let text =
+`Fee Breakdown
+
+Original balance entered:
+${formatCurrency(balance)}
+
+Compliance stage fee already included:
+${formatCurrency(settings.complianceFee)}
+
+Balance after removing compliance fee:
+${formatCurrency(balanceWithoutCompliance)}
+
+Base enforcement fee:
+${formatCurrency(settings.enforcementBaseFee)}
+`;
+
+    if (balanceWithoutCompliance > 1500) {
+
+        const excess =
+            balanceWithoutCompliance - 1500;
+
+        const percentage =
+            roundUpToWholePound(excess * 0.075);
+
+        text += `
+Amount above £1,500:
+${formatCurrency(excess)}
+
+7.5% (rounded up):
+£${percentage.toFixed(0)}
+`;
+
+    } else {
+
+        text += `
+Balance did not exceed £1,500.
+
+No percentage fee applied.
+`;
+
+    }
+
+    text += `
+--------------------------------
+
+Final Enforcement Fee:
+£${result.enforcementFee.toFixed(0)}
+
+New Balance:
+${formatCurrency(result.newBalance)}
+`;
+
+    return text;
+
+}
+
+// ---------- Breakdown Button ----------
+
+breakdownButton.addEventListener("click", () => {
+
+    if (!lastCalculation) return;
+
+    alert(lastCalculation.breakdown);
+
+});
+
+// ---------- Copy Summary ----------
+
+copyButton.addEventListener("click", async () => {
+
+    if (!lastCalculation) return;
+
+    const summary =
+`FeeFlow Summary
+
+Regime:
+${lastCalculation.regime === "pre" ? "Pre May" : "Post May"}
+
+Original Balance:
+${formatCurrency(lastCalculation.balance)}
+
+Enforcement Fee:
+£${lastCalculation.result.enforcementFee.toFixed(0)}
+
+New Balance:
+${formatCurrency(lastCalculation.result.newBalance)}
+`;
+
+    try {
+
+        await navigator.clipboard.writeText(summary);
+
+        alert("Summary copied.");
+
+    } catch {
+
+        alert(summary);
+
+    }
+
+});
