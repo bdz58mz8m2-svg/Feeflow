@@ -259,3 +259,24 @@ ${formatCurrency(lastCalculation.result.newBalance)}
     }
 
 });
+// ---------- Greeting ----------
+
+function updateGreeting() {
+
+    const greeting = document.getElementById("greeting");
+
+    const hour = new Date().getHours();
+
+    if (hour < 12) {
+        greeting.textContent = "Good Morning Adam 👋";
+    }
+    else if (hour < 18) {
+        greeting.textContent = "Good Afternoon Adam ☀️";
+    }
+    else {
+        greeting.textContent = "Good Evening Adam 🌙";
+    }
+
+}
+
+updateGreeting();
