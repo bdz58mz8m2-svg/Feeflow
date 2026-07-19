@@ -142,3 +142,65 @@ button{
     letter-spacing: 1px;
     text-transform: uppercase;
 }
+/* ---------- Breakdown Modal ---------- */
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    z-index: 1000;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modalContent {
+    background: white;
+    width: 100%;
+    max-width: 500px;
+    border-radius: 18px;
+    padding: 24px;
+    box-shadow: 0 15px 40px rgba(0,0,0,.25);
+    animation: modalPop .2s ease;
+}
+
+.modalContent h2 {
+    margin-top: 0;
+    color: #3498db;
+}
+
+.modalContent pre {
+    white-space: pre-wrap;
+    font-family: inherit;
+    line-height: 1.6;
+    font-size: 15px;
+    margin: 20px 0;
+}
+
+#closeBreakdown {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    background: #3498db;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+@keyframes modalPop {
+    from {
+        transform: scale(.95);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
