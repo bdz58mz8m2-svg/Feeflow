@@ -133,3 +133,12 @@ button{
 .hidden{
     display:none;
 }
+.version {
+    margin-top: -8px;
+    margin-bottom: 10px;
+    color: #7f8c8d;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
