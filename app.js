@@ -23,6 +23,7 @@ const calculateButton = document.getElementById("calculateButton");
 const resetButton = document.getElementById("resetButton");
 
 const resultsCard = document.getElementById("results");
+const recentList = document.getElementById("recentList");
 
 const enforcementFeeOutput = document.getElementById("enforcementFee");
 const newBalanceOutput = document.getElementById("newBalance");
@@ -154,6 +155,7 @@ const breakdownButton = document.getElementById("breakdownButton");
 const copyButton = document.getElementById("copyButton");
 
 let lastCalculation = null;
+let calculationHistory = [];
 
 function createBreakdown(balance, regime, result) {
 
