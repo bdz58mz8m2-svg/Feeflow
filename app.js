@@ -132,6 +132,18 @@ lastCalculation = {
     breakdown: createBreakdown(balance, regime, result)
 
 };
+    calculationHistory.unshift({
+    balance,
+    regime,
+    fee: result.enforcementFee,
+    newBalance: result.newBalance
+});
+
+if (calculationHistory.length > 5) {
+    calculationHistory.pop();
+}
+
+updateHistory();
 
 displayResults(result);
 });
