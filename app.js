@@ -309,3 +309,36 @@ function updateGreeting() {
 }
 
 updateGreeting();
+
+function updateHistory() {
+
+    if (calculationHistory.length === 0) {
+        recentList.innerHTML = "<p>No calculations yet.</p>";
+        return;
+    }
+
+    recentList.innerHTML = "";
+
+    calculationHistory.forEach(item => {
+
+        const card = document.createElement("div");
+
+        card.className = "resultItem";
+
+        card.innerHTML = `
+            <div>
+                <strong>${item.regime === "pre" ? "Pre May" : "Post May"}</strong><br>
+                £${item.balance.toFixed(2)}
+            </div>
+
+            <div style="text-align:right;">
+                Fee £${item.fee}<br>
+                Total £${item.newBalance.toFixed(2)}
+            </div>
+        `;
+
+        recentList.appendChild(card);
+
+    });
+
+}
