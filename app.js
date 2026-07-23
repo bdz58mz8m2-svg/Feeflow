@@ -27,6 +27,10 @@ const resultsCard = document.getElementById("results");
 const enforcementFeeOutput = document.getElementById("enforcementFee");
 const newBalanceOutput = document.getElementById("newBalance");
 
+const breakdownModal = document.getElementById("breakdownModal");
+const breakdownText = document.getElementById("breakdownText");
+const closeBreakdown = document.getElementById("closeBreakdown");
+
 // ---------- Utility Functions ----------
 
 function getSelectedRegime() {
@@ -220,9 +224,20 @@ breakdownButton.addEventListener("click", () => {
 
     if (!lastCalculation) return;
 
-    alert(lastCalculation.breakdown);
+    breakdownText.textContent = lastCalculation.breakdown;
+
+    breakdownModal.classList.remove("hidden");
+
+    
+});
+
+    closeBreakdown.addEventListener("click", () => {
+
+    breakdownModal.classList.add("hidden");
+
 
 });
+
 
 // ---------- Copy Summary ----------
 
